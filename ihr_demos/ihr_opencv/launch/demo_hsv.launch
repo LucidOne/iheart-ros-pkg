@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="rosbag" type="rosbag" name="rosbag" args="play $(find ihr_demo_bags)/bags/two_oranges.bag"/>
+  <node name="demo" pkg="ihr_opencv" type="ihr_demo_hsv" respawn="false" output="screen" />
+</launch>

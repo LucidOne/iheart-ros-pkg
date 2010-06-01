@@ -1,0 +1,8 @@
+<stack>
+  <description brief="ihr_demos">I Heart Robotics ROS Demos</description>
+  <author>Maintained by I Heart Robotics</author>
+  <license>GPL</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ihr_demos</url>
+  <depend stack="ros" />
+</stack>

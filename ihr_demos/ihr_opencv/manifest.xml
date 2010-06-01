@@ -1,0 +1,18 @@
+<package>
+  <description brief="ihr_demo_1">
+    I Heart Robotics ROS OpenCV Demos
+  </description>
+  <author>I Heart Robotics</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ihr_opencv</url>
+  <depend package="sensor_msgs"/>
+  <depend package="opencv2"/>
+  <depend package="cv_bridge"/>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="image_transport"/>
+  <depend package="ihr_demo_bags"/>
+</package>
+
+

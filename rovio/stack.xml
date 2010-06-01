@@ -1,0 +1,9 @@
+<stack>
+  <description brief="rovio">rovio</description>
+  <author>Maintained by I Heart Robotics</author>
+  <license>GPL</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rovio</url>
+  <depend stack="ros" />
+  <depend stack="joystick_drivers" />
+</stack>

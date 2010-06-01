@@ -1,0 +1,21 @@
+<!-- 
+Main Launch file for the Rovio
+-->
+
+<launch>
+
+  <env name="PROBE_CONFIG" value="souphttpsrc user-id=admin user-pw=password location=http://192.168.10.18/GetData.cgi\?Status=false do-timestamp=true ! queue ! multipartdemux ! capsfilter caps = 'image/jpeg' ! jpegdec ! ffmpegcolorspace ! video/x-raw-rgb ! identity name=ros ! fakesink"/>
+
+  <node name="probe" pkg="probe" type="probe" respawn="false" output="screen"/>
+  <node respawn="true" pkg="joy" type="joy_node" name="joy" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.01" />
+  </node>
+  <node name="foo" pkg="rovio_teleop" type="rovio_teleop" respawn="false" output="screen"/>
+  <node name="controller" pkg="rovio_controller" type="rovio_controller" respawn="false" output="screen">
+    <param name="rovio_hostname" type="string" value="192.168.10.18"/>
+    <param name="rovio_username" type="string" value="admin"/>
+    <param name="rovio_password" type="string" value="password"/>
+  </node>
+</launch>
+

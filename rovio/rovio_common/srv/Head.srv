@@ -1,0 +1,9 @@
+# Valid Head Positions
+int8 DOWN=0
+int8 MID=1
+int8 UP=2
+# Requested Position
+int8 position
+---
+# Return Status
+int8 status

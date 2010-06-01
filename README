@@ -1,0 +1,10 @@
+This is the I Heart Robotics ROS Repository
+http://www.iheartrobotics.com
+
+ROS documentation 
+---
+http://www.ros.org/wiki/iheart-ros-pkg
+
+To download using git
+----
+git clone git://github.com/IHeartRobotics/iheart-ros-pkg.git

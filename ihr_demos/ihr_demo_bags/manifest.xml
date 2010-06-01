@@ -1,0 +1,12 @@
+<package>
+  <description brief="ihr_demo_bags">
+    Bag files used in Demos
+  </description>
+  <author>I Heart Robotics</author>
+  <license>Creative Commons BY-NC-SA</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ihr_demo_bags</url>
+  <depend package="std_msgs"/>
+</package>
+
+

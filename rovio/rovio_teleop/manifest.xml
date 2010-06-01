@@ -1,0 +1,18 @@
+<package>
+  <description brief="rovio_teleop">
+
+     The rovio_teleop package maps joystick commands to velocity commands. Joystick buttons are used to control the position of the head.
+
+  </description>
+  <author>I Heart Robotics</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rovio_teleop</url>
+  <depend package="std_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="joy"/>
+  <depend package="geometry_msgs"/>
+  <depend package="rovio_common"/>
+</package>
+
+

@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="rosbag" type="rosbag" name="rosbag" args="play $(find ihr_demo_bags)/bags/two_oranges.bag"/>
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/usb_cam/image_raw"/>
+  </node>
+</launch>

@@ -1,0 +1,21 @@
+<package>
+  <description brief="rovio_common">
+
+     rovio_common contains common messages and services related to the Rovio stack
+
+  </description>
+  <author>I Heart Robotics</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rovio_common</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="rosbagmigration"/>
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
+    <rosbagmigration rule_file="migration_rules/rovio_msgs.bmr"/>
+  </export>
+
+</package>
+
+
