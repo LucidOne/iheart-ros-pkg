@@ -69,8 +69,8 @@ public:
 
     // Convert IplImage to cv::Mat
     img_in_ = cv::Mat (cv_input_).clone ();
-    // Convert Input image from RGB to HSV
-    cv::cvtColor (img_in_, img_hsv_, CV_RGB2HSV);
+    // Convert Input image from BGR to HSV
+    cv::cvtColor (img_in_, img_hsv_, CV_BGR2HSV);
     // Display HSV Image in HighGUI window
     cv::imshow ("hsv", img_hsv_);
 
