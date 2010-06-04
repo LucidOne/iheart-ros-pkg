@@ -30,3 +30,4 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #target_link_libraries(example ${PROJECT_NAME})
 
 rosbuild_add_executable(ihr_demo_hsv src/ihr_demo_hsv.cpp)
+rosbuild_add_executable(ihr_demo_segment src/ihr_demo_segment.cpp)
