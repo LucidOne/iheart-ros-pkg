@@ -31,3 +31,5 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 rosbuild_add_executable(ihr_demo_hsv src/ihr_demo_hsv.cpp)
 rosbuild_add_executable(ihr_demo_segment src/ihr_demo_segment.cpp)
+rosbuild_add_executable(ihr_demo_morph src/ihr_demo_morph.cpp)
+rosbuild_add_executable(ihr_demo_hough src/ihr_demo_hough.cpp)
