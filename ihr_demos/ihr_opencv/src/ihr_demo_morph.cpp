@@ -100,11 +100,11 @@ public:
       }
     }
 
-    cv::Size ksize;
-    ksize.width = 3;
-    ksize.height = 3;
-    cv::Mat kernel = cv::getStructuringElement(cv::MORPH_ELLIPSE,ksize);
-    cv::morphologyEx(img_bin_,img_out_,cv::MORPH_OPEN,kernel,cv::Point(-1, -1),3);
+    cv::Size strel_size;
+    strel_size.width = 3;
+    strel_size.height = 3;
+    cv::Mat strel = cv::getStructuringElement(cv::MORPH_ELLIPSE,strel_size);
+    cv::morphologyEx(img_bin_,img_out_,cv::MORPH_OPEN,strel,cv::Point(-1, -1),3);
     
     // Display Input image
     cv::imshow ("input", img_in_);

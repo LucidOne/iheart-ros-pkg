@@ -54,7 +54,7 @@ public:
     // Open HighGUI Window
     cv::namedWindow ("input", 1);
     cv::namedWindow ("binary image", 1);
-    cv::namedWindow ("detected output", 1);
+    cv::namedWindow ("segmented output", 1);
   }
 
   void imageCallback (const sensor_msgs::ImageConstPtr & msg_ptr)
@@ -90,45 +90,28 @@ public:
       {
         // The output pixel is white if the input pixel
         // hue is orange and saturation is reasonable
-        if(img_hue_.at<uchar>(i,j) > 6 &&
-           img_hue_.at<uchar>(i,j) < 26 &&
+        if(img_hue_.at<uchar>(i,j) > 4 &&
+           img_hue_.at<uchar>(i,j) < 28 &&
            img_sat_.at<uchar>(i,j) > 96) {
           img_bin_.at<uchar>(i,j) = 255;
         } else {
           img_bin_.at<uchar>(i,j) = 0;
+          // Clear pixel blue output channel
+          img_out_.at<uchar>(i,j*3+0) = 0;
+          // Clear pixel green output channel
+          img_out_.at<uchar>(i,j*3+1) = 0;
+          // Clear pixel red output channel
+          img_out_.at<uchar>(i,j*3+2) = 0;
         }
       }
-    }
-
-    cv::Size strel_size;
-    strel_size.width = 3;
-    strel_size.height = 3;
-    cv::Mat strel = cv::getStructuringElement(cv::MORPH_ELLIPSE,strel_size);
-    cv::morphologyEx(img_bin_,img_bin_,cv::MORPH_OPEN,strel,cv::Point(-1, -1),2);
-
-    cv::bitwise_not(img_bin_,img_bin_);
-    cv::GaussianBlur(img_bin_, img_bin_, cv::Size(7, 7), 2, 2 );
-
-    // See http://opencv.willowgarage.com/documentation/cpp/feature_detection.html?highlight=hough#HoughCircles
-    cv::vector<cv::Vec3f> circles;
-    cv::HoughCircles(img_bin_, circles, CV_HOUGH_GRADIENT, 1, 70, 140, 15, 20, 400 );
-    for( size_t i = 0; i < circles.size(); i++ )
-    {
-         cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
-         int radius = cvRound(circles[i][2]);
-         // draw the circle center
-         cv::circle( img_out_, center, 3, cv::Scalar(0,255,0), -1, 8, 0 );
-         // draw the circle outline
-         cv::circle( img_out_, center, radius+1, cv::Scalar(0,0,255), 2, 8, 0 );
-         ROS_INFO("x: %d y: %d r: %d",center.x,center.y, radius);
     }
 
     // Display Input image
     cv::imshow ("input", img_in_);
     // Display Binary Image
     cv::imshow ("binary image", img_bin_);
-    // Display morphed image
-    cv::imshow ("detected output", img_out_);
+    // Display segmented image
+    cv::imshow ("segmented output", img_out_);
 
     // Needed to  keep the HighGUI window open
     cv::waitKey (3);
