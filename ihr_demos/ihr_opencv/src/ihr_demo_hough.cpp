@@ -100,26 +100,36 @@ public:
       }
     }
 
+    // strel_size is the size of the structuring element
     cv::Size strel_size;
     strel_size.width = 3;
     strel_size.height = 3;
+    // Create an elliptical structuring element
     cv::Mat strel = cv::getStructuringElement(cv::MORPH_ELLIPSE,strel_size);
+    // Apply an opening morphological operation using the structing element to the image twice
     cv::morphologyEx(img_bin_,img_bin_,cv::MORPH_OPEN,strel,cv::Point(-1, -1),2);
 
+    // Convert White on Black to Black on White by inverting the image
     cv::bitwise_not(img_bin_,img_bin_);
+    // Blur the image to improve detection
     cv::GaussianBlur(img_bin_, img_bin_, cv::Size(7, 7), 2, 2 );
 
     // See http://opencv.willowgarage.com/documentation/cpp/feature_detection.html?highlight=hough#HoughCircles
+    // The vector circles will hold the position and radius of the detected circles
     cv::vector<cv::Vec3f> circles;
+    // Detect circles That have a radius between 20 and 400 that are a minimum of 70 pixels apart
     cv::HoughCircles(img_bin_, circles, CV_HOUGH_GRADIENT, 1, 70, 140, 15, 20, 400 );
+
     for( size_t i = 0; i < circles.size(); i++ )
     {
+         // round the floats to an int
          cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
          int radius = cvRound(circles[i][2]);
          // draw the circle center
          cv::circle( img_out_, center, 3, cv::Scalar(0,255,0), -1, 8, 0 );
          // draw the circle outline
          cv::circle( img_out_, center, radius+1, cv::Scalar(0,0,255), 2, 8, 0 );
+         // Debugging Output
          ROS_INFO("x: %d y: %d r: %d",center.x,center.y, radius);
     }
 

@@ -100,12 +100,16 @@ public:
       }
     }
 
+    // strel_size is the size of the structuring element
     cv::Size strel_size;
     strel_size.width = 3;
     strel_size.height = 3;
+    // Create an elliptical structuring element
     cv::Mat strel = cv::getStructuringElement(cv::MORPH_ELLIPSE,strel_size);
+    // Apply an opening morphological operation using the structing element to the image three times
     cv::morphologyEx(img_bin_,img_out_,cv::MORPH_OPEN,strel,cv::Point(-1, -1),3);
     
+
     // Display Input image
     cv::imshow ("input", img_in_);
     // Display Binary Image
