@@ -1,0 +1,8 @@
+<stack>
+  <description brief="ihr_tools">I Heart Robotics Tools</description>
+  <author>Maintained by I Heart Robotics</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ihr_tools</url>
+  <depend stack="ros" />
+</stack>

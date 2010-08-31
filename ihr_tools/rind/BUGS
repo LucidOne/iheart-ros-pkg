@@ -1,0 +1,12 @@
+In Ubuntu 10.04 libindicator has a few issues to say the least.
+
+1) No underscores in topic names
+The most annoying bug is that topics do not contain underscores due to
+https://bugs.launchpad.net/indicator-application/+bug/611943
+
+2) Submenus are disables due to horrible performance, lack of signals and being displayed in the reverse order.
+https://bugs.launchpad.net/ubuntu/+source/ibus/+bug/564034
+
+3) Other stupid bugs
+"Remove from Panel" removes all the indicators
+set_state(gtk.STATE_NORMAL) does not replace set_state(gtk.STATE_INACTIVE)

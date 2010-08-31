@@ -1,0 +1,14 @@
+<package>
+	<description brief="rind">Robot/ROS Status Indicator</description>
+  <author>I Heart Robotics</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rind</url>
+  <depend package="roslib"/>
+  <depend package="rosgraph"/>
+  <depend package="rosmsg"/>
+  <depend package="rospy"/>
+  <depend package="rosrecord"/>
+</package>
+
+
