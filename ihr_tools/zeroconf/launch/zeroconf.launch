@@ -1,0 +1,12 @@
+<launch>
+  <node name="zeroconf" pkg="zeroconf" type="zeroconf.py" respawn="false" output="screen">
+    <param name="publish_master" value="true"/>
+    <param name="master_name" value="Winston X. Robot"/>
+<!--
+    <param name="service_type" value="_ros-master._tcp"/>
+    <param name="master_host" value="foo"/>
+    <param name="master_domain" value="local"/>
+    <param name="master_port" value="11311"/>
+-->
+  </node>
+</launch>

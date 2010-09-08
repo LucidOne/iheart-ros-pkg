@@ -1,0 +1,11 @@
+<gconfentryfile>
+  <entrylist base="/apps/service-discovery-applet/services">
+    <entry>
+      <key>_ros-master._tcp</key>
+      <value>
+        <bool>true</bool>
+      </value>
+    </entry>
+  </entrylist>
+</gconfentryfile>
+

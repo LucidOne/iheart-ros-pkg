@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone='no'?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+<name>ROS Master</name>
+<service>
+<type>_ros-master._tcp</type>
+<port>11311</port>
+</service>
+</service-group>

@@ -1,0 +1,8 @@
+--- ros/ros/tools/roslaunch/roscore.xml.bak	2010-09-07 07:11:55.000000000 -0400
++++ ros/ros/tools/roslaunch/roscore.xml	2010-09-07 07:12:35.711024107 -0400
+@@ -8,4 +8,5 @@
+   <master auto="start" />
+   <!-- all the nodes in the core file must have the name attribute specified -->
+   <node pkg="rosout" type="rosout" name="rosout" respawn="true"/>
++  <node name="zeroconf" pkg="zeroconf" type="zeroconf.py" respawn="true"/>
+ </launch>

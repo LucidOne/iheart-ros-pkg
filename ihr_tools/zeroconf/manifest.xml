@@ -1,0 +1,12 @@
+<package>
+  <description brief="zeroconf">Zero Configuration tools for ROS</description>
+  <author>I Heart Robotics</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/zeroconf</url>
+  <depend package="rospy"/>
+  <depend package="roslib"/>
+  <depend package="std_msgs"/>
+  <rosdep name="python-avahi"/>
+  <rosdep name="avahi-daemon"/>
+</package>
