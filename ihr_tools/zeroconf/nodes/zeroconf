@@ -53,6 +53,7 @@ _masters = {}
 
 class Zeroconf(threading.Thread):
     def __init__(self):
+        # FIXME Review thread locking as needed.
         # init thread
         threading.Thread.__init__(self)
         # Gobjects are an event based model of evil, do not trust them,
@@ -101,9 +102,6 @@ class ZeroconfDiscover():
             self._browser.connect_to_signal("ItemNew", self.resolve_service_add_callback)
             self._browser.connect_to_signal("ItemRemove", self.resolve_service_del_callback)
 
-    def __del__(self):
-        del(self._browser)
-
     def service_add_resolved_callback(self,*args):
         global _masters
         _masters[args[2]] = 'http://%s:%s'%(args[5],args[8])
@@ -112,10 +110,12 @@ class ZeroconfDiscover():
         rospy.logerr(args[0])
 
     def resolve_service_add_callback(self,interface, protocol, name, stype, domain, flags):
-        self._zeroconf._server.ResolveService(interface, protocol, name, stype,
-                              domain, avahi.PROTO_UNSPEC, dbus.UInt32(0) & avahi.LOOKUP_RESULT_CACHED,
-                              reply_handler=self.service_add_resolved_callback,
-                              error_handler=self.print_error_callback)
+        self._zeroconf._server.ResolveService(
+            interface, protocol, name, stype,
+            domain, avahi.PROTO_UNSPEC,
+            dbus.UInt32(0) & avahi.LOOKUP_RESULT_CACHED,
+            reply_handler=self.service_add_resolved_callback,
+            error_handler=self.print_error_callback)
 
     def resolve_service_del_callback(self,interface, protocol, name, stype, domain, flags,*args):
         global _masters
@@ -144,11 +144,6 @@ class ZeroconfPublisher():
             ('localhost' if self._master_host is None else self._master_host),
             ('' if self._master_domain is None else "." + self._master_domain),
             self._master_port)
-
-    def run(self):
-        #do stuff
-        #does this actually need a thread?
-        a = 1
 
     def state_changed_callback(self,state):
         if state == avahi.SERVER_COLLISION:
@@ -205,7 +200,6 @@ def handle_discover_masters(req):
     return DiscoverMastersResponse(response)
 
 if __name__ == '__main__':
-    #rospy.init_node('zeroconf_publisher',disable_signals=True)
     rospy.init_node('zeroconf')
     _publish_master = rospy.get_param('publish_master',True)
     zconf = Zeroconf()
@@ -216,8 +210,6 @@ if __name__ == '__main__':
 
     rospy.Service('~discover_masters', DiscoverMasters, handle_discover_masters)
 
-    while not rospy.is_shutdown():
-        rospy.sleep(0.01)
     rospy.spin()
-
+    # Stop the Gobject before it stops you.
     zconf.stop()
