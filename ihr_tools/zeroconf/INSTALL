@@ -2,9 +2,9 @@ Startup options to publish the MASTER_URI using Avahi
 ------------------------------------------------
 1) add a zeroconf node to the launch file of the master
 2) add ros-master.service to /etc/avahi/services on the machine that runs rosmaster
-	cp ros-master.service /etc/avahi/services/.
+	cp `rospack find zeroconf`/config/ros-master.service /etc/avahi/services/.
 3) add zeroconf directly to roscore startup via this patch
-	patch `rospack find roslaunch`/roscore.xml < roscore.xml.patch
+	patch `rospack find roslaunch`/roscore.xml < `rospack find zeroconf`/config/roscore.xml.patch
 
 
 Avahi does not currently support ROS service types and the build script isn't installed by default. The following commands will install updated files if you have not modified them, if you have previously modified these files you should know what to do. In the future a patch needs to be sent to the Avahi maintainers.
@@ -16,4 +16,4 @@ Avahi does not currently support ROS service types and the build script isn't in
 The service-discovery-applet does not support ROS service types by default, however the following command will add support.
 ------------------------------------------------
 
-	gconftool --load service-discovery-applet.xml
+	gconftool --load `rospack find zeroconf`/config/service-discovery-applet.xml

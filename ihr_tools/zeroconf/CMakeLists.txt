@@ -28,3 +28,10 @@ rosbuild_gensrv()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
+
+add_custom_target(install sudo cp config/service-types /usr/share/avahi/service-types
+	COMMAND sudo cp config/service-types.db /usr/lib/avahi/service-types.db
+	COMMAND gconftool --load config/service-discovery-applet.xml
+	WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR}
+	COMMENT "Installing system config files")
+

@@ -1,5 +1,5 @@
 <launch>
-  <node name="zeroconf" pkg="zeroconf" type="zeroconf.py" respawn="false" output="screen">
+  <node name="zeroconf" pkg="zeroconf" type="zeroconf" respawn="false" output="screen">
     <param name="publish_master" value="true"/>
     <param name="master_name" value="Winston X. Robot"/>
 <!--
