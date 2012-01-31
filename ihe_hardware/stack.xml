@@ -1,0 +1,12 @@
+<stack>
+  <description brief="ihe_hardware">I Heart 
+Engineering Hardware</description>
+  <author>Maintained by I Heart Engineering</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ihe_hardware</url>
+  <depend stack="robot_model" /> <!-- urdf -->
+  <depend stack="ros" />
+  <depend stack="xacro" /> <!-- xacro -->
+
+</stack>

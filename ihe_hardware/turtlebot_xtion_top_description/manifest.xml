@@ -1,0 +1,16 @@
+<package>
+  <description brief="turtlebot_xtion_top_description">
+
+     turtlebot_xtion_top_description provides a complete 3D model of a TurtleBot with an ASUS Xtion Pro Live camera mounted on top.
+
+  </description>
+  <author>Melonee Wise, I Heart Engineering</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/turtlebot_xtion_top_description</url>
+  <depend package="urdf"/>
+  <depend package="xacro"/>
+
+</package>
+
+
