@@ -1,0 +1,16 @@
+<package>
+  <description brief="testbench">
+    ROS Performance Testbench
+  </description>
+  <author>I Heart Engineering</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/testbench</url>
+  <depend package="roscpp"/>
+  <depend package="pluginlib"/>
+  <export>
+    <cpp cflags="-I${prefix}/include" />
+  </export>
+</package>
+
+

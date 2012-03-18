@@ -1,0 +1,8 @@
+<stack>
+  <description brief="ihe_benchmark">ROS Performance Benchmark Tools</description>
+  <author>Maintained by I Heart Engineering</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ihe_benchmark</url>
+  <depend stack="ros" />
+</stack>
