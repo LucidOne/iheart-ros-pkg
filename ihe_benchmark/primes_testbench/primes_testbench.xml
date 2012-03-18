@@ -1,0 +1,5 @@
+<library path="lib/libtestbench">
+  <class name="testbench/test_primes" type="test_plugins::Primes" base_class_type="test_base::Test">
+    <description>Tests the calculation time of checking if several large numbers are prime.</description>
+  </class>
+</library>

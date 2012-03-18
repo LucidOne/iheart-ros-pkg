@@ -1,0 +1,17 @@
+<package>
+  <description brief="primes_testbench">
+Test checks if several large numbers are prime.
+  </description>
+  <author>I Heart Engineering</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/primes_testbench</url>
+  <depend package="roscpp"/>
+  <depend package="pluginlib"/>
+  <depend package="testbench"/>
+  <export>
+    <testbench plugin="${prefix}/primes_testbench.xml" />
+  </export>
+</package>
+
+
