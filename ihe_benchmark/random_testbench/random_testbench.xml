@@ -1,0 +1,5 @@
+<library path="lib/libtestbench">
+  <class name="testbench/test_random" type="test_plugins::Random" base_class_type="test_base::Test">
+    <description>This is a random test.</description>
+  </class>
+</library>

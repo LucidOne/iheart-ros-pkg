@@ -1,0 +1,17 @@
+<package>
+  <description brief="random_testbench">
+This useless test outputs a random score as an example.
+  </description>
+  <author>I Heart Engineering</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/random_testbench</url>
+  <depend package="roscpp"/>
+  <depend package="pluginlib"/>
+  <depend package="testbench"/>
+  <export>
+    <testbench plugin="${prefix}/random_testbench.xml" />
+  </export>
+</package>
+
+
