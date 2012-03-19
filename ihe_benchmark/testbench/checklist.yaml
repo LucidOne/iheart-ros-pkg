@@ -1,0 +1,16 @@
+- 
+  name: "Random Test 1"
+  plugin: testbench/test_random
+  weight: 5
+- 
+  name: "Random Test 2"
+  plugin: testbench/test_random
+  weight: 5
+- 
+  name: "Prime Test"
+  plugin: testbench/test_primes
+  weight: 60
+-
+  name: "Topic Test"
+  plugin: testbench/test_topic
+  weight: 30
