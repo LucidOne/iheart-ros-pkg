@@ -1,0 +1,5 @@
+<library path="lib/libtestbench">
+  <class name="testbench/test_topic" type="test_plugins::Topic" base_class_type="test_base::Test">
+    <description>Tests the update frequency of a given topic.</description>
+  </class>
+</library>

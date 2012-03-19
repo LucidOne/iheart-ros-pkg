@@ -1,0 +1,17 @@
+<package>
+  <description brief="topic_testbench">
+Test a topic update frequency.
+  </description>
+  <author>I Heart Engineering</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/topic_testbench</url>
+  <depend package="roscpp"/>
+  <depend package="pluginlib"/>
+  <depend package="testbench"/>
+  <export>
+    <testbench plugin="${prefix}/topic_testbench.xml" />
+  </export>
+</package>
+
+
