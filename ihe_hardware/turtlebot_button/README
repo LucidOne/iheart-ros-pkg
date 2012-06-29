@@ -1,0 +1,10 @@
+There is a 30 second delay before the correct messages are sent.
+
+Add the header file for Button.msg to Arduino libraries:
+rosrun rosserial_client make_library.py PATH_TO_ARDUINO_LIBRARY turtlebot_button
+
+To run:
+
+1) Upload buttons_turtlebot.ino onto an Arduino.
+2) Run the rosserial client that forwards the message to the rest of ROS:
+	rosrun rosserial_python serial_node.py USB_PORT
