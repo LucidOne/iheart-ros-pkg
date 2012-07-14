@@ -1,10 +1,14 @@
 #include <ros.h>
+#include <std_msgs/Bool.h>
 #include <turtlebot_button/Buttons.h>
 
 ros::NodeHandle nh;
 
+std_msgs::Bool estop_msg;
 turtlebot_button::Buttons button_msg;
+
 ros::Publisher pub_button("buttons", &button_msg);
+ros::Publisher pub_estop("estop", &estop_msg);
 
 const int num_buttons = 5;
 
@@ -25,6 +29,7 @@ int i;
 void setup() {
   nh.initNode();
   nh.advertise(pub_button);
+  nh.advertise(pub_estop);
   
   pinMode(estop, INPUT);
   pinMode(button0, INPUT);
@@ -39,7 +44,7 @@ void setup() {
   
   // Get initial state
   // Depressed estop returns 0; otherwise, 1
-  button_msg.estop_state = digitalRead(estop); 
+  estop_msg.data = digitalRead(estop); 
   
   for (i = 0; i < num_buttons; i++) {
     // Buttons are normally high.
@@ -81,15 +86,16 @@ void loop() {
     }
   }
   
-  if (estop_reading != button_msg.estop_state) {
-    button_msg.estop_state = estop_reading;
-    published = false;
-  }
-  
   // Publish updated button message
   if (!published) {
     pub_button.publish(&button_msg);
     published = true;
+  }
+  
+  // Publish estop message if state changed
+  if (estop_reading != estop_msg.data) {
+    estop_msg.data = estop_reading;
+    pub_estop.publish(&estop_msg);
   }
   
   nh.spinOnce();

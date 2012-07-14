@@ -6,10 +6,16 @@ Add the header file for Button.msg to Arduino libraries:
 
 
 
-To run:
-
-1) Upload buttons_turtlebot/buttons_turtlebot.ino onto an Arduino. (Currently 
+To publish button messages:
+---------------------------
+1) Upload arduino/buttons_turtlebot.ino onto an Arduino. (Currently 
    not compatiable with Leonardo.)
-2) Run the rosserial client that forwards the message to the rest of ROS.
+2) Run the rosserial client that forwards the message to the rest of ROS:
 
-       rosrun rosserial_python serial_node.py SERIAL_PORT
+	rosrun rosserial_python serial_node.py SERIAL_PORT
+
+To run demo:
+------------
+3) Launch turtlebot_button_op node:
+
+	roslaunch turtlebot_button turtlebot_button.launch

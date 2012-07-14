@@ -12,6 +12,8 @@
   <depend package="rosserial_client"/>
   <depend package="rosserial_msgs"/>
   <depend package="rosserial_python"/>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
 
 </package>
 
