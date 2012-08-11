@@ -1,0 +1,36 @@
+Format for yaml File
+--------------------
+- package: <package name>
+  files:
+    - filename: <filename>
+      parts:
+        - part_name: <macro name>
+          params:
+            <parameter name>: <parameter value>
+
+
+Generate urdf File
+--------------------
+Generate xml file.
+
+    rosrun urdf_compose compose.py [-o <outfile>] <yaml>
+
+If -o is not specificed, the default is standard output.
+
+
+Run Demo
+--------
+1.  Open the urdf directory.
+
+        roscd urdf_compose/urdf
+
+2.  Generate urdf files. (yaml files are located in the demo directory.)
+
+        rosrun urdf_compose compose.py -o xtion.urdf.xacro ../demo/xtion.yaml
+        rosrun urdf_compose compose.py -o turtlebot.urdf.xacro ../demo/turtlebot.yaml
+
+3.  Launch rviz.
+
+        roslaunch urdf_compose demo.launch model:=<model>
+
+    <model> = {xtion.urdf.xacro, turtlebot.urdf.xacro}

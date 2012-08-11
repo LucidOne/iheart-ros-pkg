@@ -1,0 +1,21 @@
+<package>
+  <description brief="urdf_compose">
+
+     urdf_compose provides a way to generate urdf files for the union of
+     previously defined hardware.
+
+  </description>
+  <author>linda</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/urdf_compose</url>
+
+  <depend package="urdf"/>
+  <depend package="xacro"/>
+  <depend package="rviz"/>
+  <depend package="joint_state_publisher"/>
+  <depend package="robot_state_publisher"/>
+
+</package>
+
+

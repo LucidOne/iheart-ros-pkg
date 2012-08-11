@@ -1,0 +1,18 @@
+- package: urdf_compose
+  files:
+    - filename: base_link.xacro
+      parts:
+        - part_name: base_link
+- package: turtlebot_xtion_top_description
+  files:
+    - filename: xtion.xacro
+      parts:
+        - part_name: xtion
+          params:
+            parent: "base_link"
+            x_loc: "0"
+            y_loc: "0"
+            z_loc: "0"
+            rr: "0"
+            rp: "0"
+            ry: "0"
