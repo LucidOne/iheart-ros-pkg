@@ -1,5 +1,6 @@
-Format for yaml File
---------------------
+Format for File to be Processed by compose.py (yaml)
+----------------------------------------------------
+
 - package: <package name>
   files:
     - filename: <filename>
@@ -10,27 +11,80 @@ Format for yaml File
 
 
 Generate urdf File
---------------------
+------------------
+
 Generate xml file.
 
-    rosrun urdf_compose compose.py [-o <outfile>] <yaml>
+    rosrun urdf_compose compose.py <yaml> [-o <outfile>] [-n <robot name>]
 
-If -o is not specificed, the default is standard output.
+If -o is not specificed, the default is standard output. If -n is not
+specified, the default is "turtlebot".
 
 
 Run Demo
 --------
+
+The compose script is to be used only if all parts listed are macros.
+
 1.  Open the urdf directory.
 
         roscd urdf_compose/urdf
 
 2.  Generate urdf files. (yaml files are located in the demo directory.)
 
-        rosrun urdf_compose compose.py -o xtion.urdf.xacro ../demo/xtion.yaml
-        rosrun urdf_compose compose.py -o turtlebot.urdf.xacro ../demo/turtlebot.yaml
+        rosrun urdf_compose compose.py ../demo/kinect.yaml -o kinect.urdf.xacro -n kinect
+        rosrun urdf_compose compose.py ../demo/xtion.yaml -o xtion.urdf.xacro -n xtion
+        rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
+        rosrun urdf_compose compose.py ../demo/turtlebot.yaml -o turtlebot.urdf.xacro
 
 3.  Launch rviz.
 
         roslaunch urdf_compose demo.launch model:=<model>
 
-    <model> = {xtion.urdf.xacro, turtlebot.urdf.xacro}
+    <model> = {kinect.urdf.xacro, xtion.urdf.xacro, turtlebot.urdf.xacro, turtlebot_body.urdf.xacro}
+
+Note: The turtlebot_body included in the package does not include the kinect standoffs
+      unlike the body included in turtlebot_description.
+
+
+
+
+Run GUI
+-------
+
+1. Build the turtlebot_body.
+
+        roscd urdf_compose/urdf
+        rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
+
+2. Run the GUI.
+
+        rosrun urdf_compose gui.py
+
+If the output file is placed in urdf_compose/urdf, you can launch demo.launch to view
+the robot in rviz.
+
+Robots added to the "Select robot" combo box should not be macros. Only unique robot
+names will be listed.
+
+Only macros from added files will be displayed in the "Accessories" list.
+
+
+Format for Descripiton Files (yaml)
+-----------------------------------
+
+<accessory name/macro name>:
+  image: <path to image>
+  description: <description>
+  parent:
+    <link name>:
+      <position name>:
+        params:         # parameters for the accessory being described
+          <parameter name>: <value>
+            requires:
+              <path to file that contains the required accessory>
+                - <accessory name/macro name>
+                    <parameter name>: <value>       # parameters for the required piece
+
+Examples are located in <path to urdf_compose>/urdf/info_kinect.yaml and
+<path to turtlebot_xtion_top_description>/urdf/info_xtion.yaml

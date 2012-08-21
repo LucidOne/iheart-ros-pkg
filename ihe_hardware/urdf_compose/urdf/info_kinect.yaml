@@ -1,0 +1,29 @@
+turtlebot_kinect:
+  image: $(find urdf_compose)/images/kinect.png
+  description: >
+    Xbox 360 Kinect
+  parent:
+    plate_2_link:
+      standard:
+        params:
+          parent: plate_2_link
+          cam_x: "-0.0844382"
+          cam_y: "0"
+          cam_z: "0.10475"
+          cam_rr: "0"
+          cam_rp: "0"
+          cam_ry: "0"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_kinect:
+                parent: plate_2_link
+                number: "0"
+                x_loc: "-0.102438"
+                y_loc: "-0.098"
+                z_loc: "0.003201"
+            - turtlebot_standoff_kinect:
+                parent: plate_2_link
+                number: "1"
+                x_loc: "-0.102438"
+                y_loc: "0.098"
+                z_loc: "0.003201"

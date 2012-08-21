@@ -1,26 +1,50 @@
-- package: turtlebot_description
+- package: urdf_compose
   files:
-    - filename: turtlebot_body.urdf.xacro
+    - filename: turtlebot_body.xacro
       parts:
         - part_name: turtlebot_body
-    - filename: turtlebot_kinect.urdf.xacro
+    - filename: kinect.xacro
       parts:
         - part_name: turtlebot_kinect
+          params:
+            parent: "plate_2_link"
+            cam_x: "-0.0844382"
+            cam_y: "0"
+            cam_z: "0.10475"
+            cam_rr: "0"
+            cam_rp: "0"
+            cam_ry: "0"
+- package: turtlebot_description
+  files:
     - filename: turtlebot_hardware.urdf.xacro
       parts:
-        - part_name: turtlebot_standoff_8in
+        - part_name: turtlebot_standoff_kinect
+          params:
+            parent: "plate_2_link"
+            number: "0"
+            x_loc: "-0.102438"
+            y_loc: "-0.098"
+            z_loc: "0.003201"
+        - part_name: turtlebot_standoff_kinect
+          params:
+            parent: "plate_2_link"
+            number: "1"
+            x_loc: "-0.102438"
+            y_loc: "0.098"
+            z_loc: "0.003201"
+        - part_name: turtlebot_standoff_8in     # for xtion
           params:
             parent: "plate_3_link"
             number: "4"
             x_loc: "-0.0892782"
-            y_loc: "0.098"
+            y_loc: "-0.098"
             z_loc: "-0.000125"
-        - part_name: turtlebot_standoff_8in
+        - part_name: turtlebot_standoff_8in     # for xtion
           params:
             parent: "plate_3_link"
             number: "5"
             x_loc: "-0.0892782"
-            y_loc: "-0.098"
+            y_loc: "0.098"
             z_loc: "-0.000125"
 - package: turtlebot_xtion_top_description
   files:

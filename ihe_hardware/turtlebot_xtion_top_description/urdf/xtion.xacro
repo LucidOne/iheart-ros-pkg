@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot name="xtion" xmlns:xacro="http://ros.org/wiki/xacro">
+  <include filename="$(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro" />
   <property name="M_PI" value="3.14159" />
 
   <xacro:macro name="xtion" params="parent x_loc y_loc z_loc rr rp ry">
@@ -35,8 +36,7 @@
     <!-- platform for xtion -->
 
     <joint name="base_xtion_platform_joint" type="fixed">
-      <origin xyz="${x_loc} ${y_loc} ${z_loc}" 
-              rpy="${rr} ${rp} ${ry}" />
+      <origin xyz="${x_loc} ${y_loc} ${z_loc}" rpy="${rr} ${rp} ${ry}" />
       <parent link="${parent}" />
       <child link="xtion_platform" />
     </joint>

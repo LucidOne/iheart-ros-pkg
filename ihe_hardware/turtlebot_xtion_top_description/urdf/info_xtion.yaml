@@ -1,0 +1,149 @@
+xtion:
+  image: $(find urdf_compose)/images/xtion.png
+  description: >
+    The ASUS Xtion PRO LIVE uses infrared sensors, adaptive depth detection
+    technology, color image sensing and audio stream to capture a users'
+    real-time image, movement, and voice, making user tracking more precise.
+    <p>
+    http://www.asus.com/Multimedia/Motion_Sensor/Xtion_PRO_LIVE/
+    </p>
+  parent:
+    plate_3_link:
+      standard:
+        params:
+          parent: plate_3_link
+          x_loc: "-0.0892782"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "0"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "-0.0892782"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "-0.0892782"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+      standard facing backward:
+        params:
+          parent: plate_3_link
+          x_loc: "-0.0892782"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "3.1415927"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "-0.0892782"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "-0.0892782"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+      middle facing forward:
+        params:
+          parent: plate_3_link
+          x_loc: "0.01316"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "0"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "0.01316"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "0.01316"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+      middle facing backward:
+        params:
+          parent: plate_3_link
+          x_loc: "0.01316"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "3.1415927"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "0.01316"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "0.01316"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+      front facing forward:
+        params:
+          parent: plate_3_link
+          x_loc: "0.0892782"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "3.1415927"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "0.0892782"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "0.0892782"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+      front facing backward:
+        params:
+          parent: plate_3_link
+          x_loc: "0.0892782"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "3.1415927"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "0.0892782"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "0.0892782"
+                y_loc: "0.098"
+                z_loc: "-0.000125"

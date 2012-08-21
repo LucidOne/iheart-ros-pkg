@@ -1,0 +1,6 @@
+kinect.xacro (urdf_compose):
+  file: $(find urdf_compose)/urdf/kinect.xacro
+  description: $(find urdf_compose)/urdf/info_kinect.yaml
+xtion.xacro (turtlebot_xtion_top_description): 
+  file: $(find turtlebot_xtion_top_description)/urdf/xtion.xacro
+  description: $(find turtlebot_xtion_top_description)/urdf/info_xtion.yaml

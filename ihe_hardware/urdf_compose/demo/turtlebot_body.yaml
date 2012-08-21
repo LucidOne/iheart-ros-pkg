@@ -1,0 +1,5 @@
+- package: urdf_compose
+  files:
+    - filename: turtlebot_body.xacro
+      parts:
+        - part_name: turtlebot_body
