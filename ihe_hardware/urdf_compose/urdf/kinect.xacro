@@ -3,7 +3,6 @@
   <property name="M_PI" value="3.14159"/>
 
   <include filename="$(find turtlebot_description)/urdf/gazebo.urdf.xacro"/>
-  <include filename="$(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro"/>
 
 <xacro:macro name="turtlebot_kinect"
              params="parent cam_x cam_y cam_z cam_rr cam_rp cam_ry">

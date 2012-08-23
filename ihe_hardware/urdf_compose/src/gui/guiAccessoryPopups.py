@@ -214,8 +214,17 @@ class AddAccessoryDialog(QtGui.QDialog):
         params = position['params']
         required = position['requires']
         result = {"part_name": self.accName, "params": params}
+        accAdded = list()
 
-        self.parent.addAccToRobot(result, self.pkg, self.fname)
+        added = self.parent.addAccToRobot(result, self.pkg, self.fname)
+
+        if added:
+            accInfo = result['part_name'] + " (" + self.pkg + ":" + self.fname + ")"
+
+            for k, v in result['params'].items():
+                accInfo += ("\n    " + k + ": " + v)
+
+            accAdded.append(accInfo)
 
         for fpath in required:
             for acc in required[fpath]:
@@ -224,8 +233,20 @@ class AddAccessoryDialog(QtGui.QDialog):
 
                 pkg, fname = re.sub("\$\(find|\)", " ", fpath).split()
                 fname = re.sub("/[\w.-/]+/", "", fname)
+                added = self.parent.addAccToRobot(result, pkg, fname, fpath)
 
-                self.parent.addAccToRobot(result, pkg, fname, fpath)
+                if added:
+                    accInfo = result['part_name'] + " (" + pkg + ":" + fname + ")"
+
+                    for k, v in result['params'].items():
+                        accInfo += ("\n    " + k + ": " + v)
+
+                    accAdded.append(accInfo)
+
+        if accAdded:
+            self.dialog = AddedAccessoryDialog(accAdded)
+        else:
+            self.dialog = AddErrorDialog()
 
     def addLE(self):
         params = dict()
@@ -235,7 +256,36 @@ class AddAccessoryDialog(QtGui.QDialog):
 
         result = {"part_name": self.accName, "params": params}
         roslib.packages.get_dir_pkg(self.accFile)
-        self.parent.addAccToRobot(result, self.pkg, self.fname)
+
+        added = self.parent.addAccToRobot(result, self.pkg, self.fname)
+
+        if not added:
+            self.dialog = AddErrorDialog()
 
     def cancel(self):
         self.close()
+
+class AddedAccessoryDialog(QtGui.QMessageBox):
+    def __init__(self, accessories):
+        super(AddedAccessoryDialog, self).__init__()
+
+        accNames = map(lambda x: x.split()[0], accessories)
+        msg = "Added %d accessories:\t\n" % len(accessories)
+        msg += ("\n    " + "\n    ".join(accNames) + '\n')
+        details = "\n\n".join(accessories)
+
+        self.setText(msg)
+        self.setDetailedText(details)
+        self.setIcon(self.Information)
+        self.show()
+
+class AddErrorDialog(QtGui.QMessageBox):
+    def __init__(self):
+        super(AddErrorDialog, self).__init__()
+
+        msg = "This accessory has already been attached."
+
+        self.setIcon(self.Critical)
+        self.setText(msg)
+        self.setWindowTitle("Error")
+        self.show()

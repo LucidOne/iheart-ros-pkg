@@ -20,11 +20,11 @@ Generate xml file.
 If -o is not specificed, the default is standard output. If -n is not
 specified, the default is "turtlebot".
 
+This script is to be used only if all parts listed are macros.
+
 
 Run Demo
 --------
-
-The compose script is to be used only if all parts listed are macros.
 
 1.  Open the urdf directory.
 
@@ -41,10 +41,13 @@ The compose script is to be used only if all parts listed are macros.
 
         roslaunch urdf_compose demo.launch model:=<model>
 
-    <model> = {kinect.urdf.xacro, xtion.urdf.xacro, turtlebot.urdf.xacro, turtlebot_body.urdf.xacro}
+    <model> = { kinect.urdf.xacro,
+                xtion.urdf.xacro,
+                turtlebot.urdf.xacro,
+                turtlebot_body.urdf.xacro }
 
-Note: The turtlebot_body included in the package does not include the kinect standoffs
-      unlike the body included in turtlebot_description.
+Note: The turtlebot_body included in the package does not include the kinect
+      standoffs like the body included in turtlebot_description.
 
 
 
@@ -52,22 +55,27 @@ Note: The turtlebot_body included in the package does not include the kinect sta
 Run GUI
 -------
 
-1. Build the turtlebot_body.
+1.  Build the turtlebot_body.
 
         roscd urdf_compose/urdf
         rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
 
-2. Run the GUI.
+2.  Run the GUI.
 
         rosrun urdf_compose gui.py
 
-If the output file is placed in urdf_compose/urdf, you can launch demo.launch to view
-the robot in rviz.
+If the output file is placed in urdf_compose/urdf, you can launch demo.launch
+to view the robot in rviz.
 
-Robots added to the "Select robot" combo box should not be macros. Only unique robot
-names will be listed.
+Robots added to the "Select robot" combo box should not be macros. Only unique
+robot names will be listed.
 
 Only macros from added files will be displayed in the "Accessories" list.
+
+You can view your robot with the attached accessories by clicking on the
+"Launch rviz" button. To reactivate the GUI window after launching rviz, close
+the opened rviz window and press Ctrl+C in the terminal where the GUI is
+running.
 
 
 Format for Descripiton Files (yaml)
@@ -84,7 +92,7 @@ Format for Descripiton Files (yaml)
             requires:
               <path to file that contains the required accessory>
                 - <accessory name/macro name>
-                    <parameter name>: <value>       # parameters for the required piece
+                    <parameter name>: <value>   # parameters for required piece
 
 Examples are located in <path to urdf_compose>/urdf/info_kinect.yaml and
 <path to turtlebot_xtion_top_description>/urdf/info_xtion.yaml

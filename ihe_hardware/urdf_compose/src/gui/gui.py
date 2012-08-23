@@ -2,6 +2,7 @@
 
 import os
 import sys
+import subprocess
 import re
 import yaml
 from xml.dom.minidom import parse, Document
@@ -27,6 +28,16 @@ class MainGUI(QtGui.QWidget):
         self.initLabels()
         self.setupLayout()
         self.centerFrame()
+        self.show()
+
+        title = "Launching rviz"
+        msg = self.tr("To reactivate the GUI window after\n"
+                      "launching rviz, close the opened\n"
+                      "rviz window and press Ctrl+C in the\n"
+                      "terminal where the GUI is running.")
+        self.msgDialog = QtGui.QMessageBox(QtGui.QMessageBox.Information, title, msg)
+        self.msgDialog.setModal(False)
+        self.msgDialog.show()
 
     def initPath(self):
         """
@@ -50,18 +61,20 @@ class MainGUI(QtGui.QWidget):
 
     def initButtons(self):
         self.btn_addRobot = QtGui.QPushButton("Add &new robot")
-        self.btn_rmRobot = QtGui.QPushButton("Remove robot")
-        self.btn_addFile = QtGui.QPushButton("Add file")
-        self.btn_rmFile = QtGui.QPushButton("Remove file")
+        self.btn_rmRobot = QtGui.QPushButton("Remove r&obot")
+        self.btn_addFile = QtGui.QPushButton("A&dd file")
+        self.btn_rmFile = QtGui.QPushButton("Re&move file")
         self.btn_addAcc = QtGui.QPushButton("&Add accessory to robot")
         self.btn_rmAcc = QtGui.QPushButton("&Remove")
         self.btn_urdf = QtGui.QPushButton("&Create URDF file")
+        self.btn_rviz = QtGui.QPushButton("&Launch rviz")
 
         self.btn_rmRobot.setEnabled(False)
         self.btn_rmFile.setEnabled(False)
         self.btn_addAcc.setEnabled(False)
         self.btn_rmAcc.setEnabled(False)
         self.btn_urdf.setEnabled(False)
+        self.btn_rviz.setEnabled(False)
 
         self.btn_addRobot.clicked.connect(self.addRobot)
         self.btn_rmRobot.clicked.connect(self.rmRobot)
@@ -70,6 +83,7 @@ class MainGUI(QtGui.QWidget):
         self.btn_addAcc.clicked.connect(self.addAcc)
         self.btn_rmAcc.clicked.connect(self.rmAcc)
         self.btn_urdf.clicked.connect(self.create)
+        self.btn_rviz.clicked.connect(self.launch)
 
     def initLabels(self):
         self.label_robot = QtGui.QLabel(bold("Select robot"))
@@ -88,7 +102,7 @@ class MainGUI(QtGui.QWidget):
 
         brush = QtGui.QBrush(self.robotBG)
         brush.setStyle(QtCore.Qt.SolidPattern)
-        
+
         self.palette = QtGui.QPalette()
         self.palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush);
         self.palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush);
@@ -96,7 +110,7 @@ class MainGUI(QtGui.QWidget):
 
         pixmap = QtGui.QPixmap(300, 500)
         pixmap.fill(self.robotBG)
-        
+
         self.img_robot = QtGui.QLabel()
         self.img_robot.setPixmap(pixmap)
         self.img_robot.setPalette(self.palette)
@@ -154,7 +168,7 @@ class MainGUI(QtGui.QWidget):
         self.list_attAcc.setSortingEnabled(True)
         self.list_files.setSortingEnabled(True)
         self.list_addAcc.setSortingEnabled(True)
-        
+
         self.list_files.addItems(self.files.keys())
         self.list_addAcc.addItem("No accessory file selected.")
 
@@ -182,7 +196,8 @@ class MainGUI(QtGui.QWidget):
         grid_robot.addWidget(self.img_robot, 0, 0, 2, 2)
         grid_robot.addWidget(self.label_attAcc, 0, 2, 1, 2)
         grid_robot.addWidget(self.list_attAcc, 1, 2, 1, 2)
-        grid_robot.addWidget(self.btn_urdf, 2, 0, 1, 2)
+        grid_robot.addWidget(self.btn_rviz, 2, 0)
+        grid_robot.addWidget(self.btn_urdf, 2, 1)
         grid_robot.addWidget(self.btn_rmAcc, 2, 2, 1, 2)
 
         grp_robot = QtGui.QGroupBox("Robot")
@@ -267,6 +282,7 @@ class MainGUI(QtGui.QWidget):
             self.img_robot.setPixmap(pixmap)
             self.btn_rmRobot.setEnabled(True)
             self.btn_urdf.setEnabled(True)
+            self.btn_rviz.setEnabled(True)
 
             if self.list_addAcc.currentItem():
                 self.btn_addAcc.setEnabled(True)
@@ -276,11 +292,14 @@ class MainGUI(QtGui.QWidget):
             pixmap.fill(self.robotBG)
             self.img_robot.setPixmap(pixmap)
 
+            self.reqFiles = list()
+            self.attachedAccessories = list()
             self.list_attAcc.clear()
             self.btn_rmRobot.setEnabled(False)
             self.btn_addAcc.setEnabled(False)
             self.btn_rmAcc.setEnabled(False)
             self.btn_urdf.setEnabled(False)
+            self.btn_rviz.setEnabled(False)
 
     def addFile(self):
         self.dialog = AddAccessoryFileDialog(self)
@@ -323,12 +342,7 @@ class MainGUI(QtGui.QWidget):
         accessory = [pkg, fname, result]
 
         if accessory in self.attachedAccessories:
-            msg = "This accessory already has been attached."
-            self.msgDialog = QtGui.QMessageBox(QtGui.QMessageBox.Critical,
-                                               "Error", msg,
-                                               QtGui.QMessageBox.Ok)
-            self.msgDialog.show()
-            return
+            return False
         else:
             self.attachedAccessories.append(accessory)
 
@@ -340,6 +354,8 @@ class MainGUI(QtGui.QWidget):
             accInfo += ("\n    " + k + ": " + v)
 
         self.list_attAcc.addItem(accInfo)
+
+        return True
 
     def selectAcc(self):
         if self.cb_robots.currentIndex() != 0:
@@ -385,9 +401,9 @@ class MainGUI(QtGui.QWidget):
             params[k] = v
 
         accName, pkg, fname = re.sub(r"[():]", ' ', accInfo[0]).split()
+        acc = [pkg, fname, {"part_name": accName, "params": params}]
 
-        self.attachedAccessories.remove([pkg, fname, {"part_name": accName,
-                                                      "params": params}])
+        self.attachedAccessories.remove(acc)
         self.list_attAcc.takeItem(selAcc)
 
         if not self.list_attAcc.count():
@@ -406,6 +422,21 @@ class MainGUI(QtGui.QWidget):
         if not re.search(r"\.urdf|\.xacro", path):
             path += ".urdf.xacro"
 
+        self.createFile(path)
+
+        title = "URDF"
+        msg = "File created at " + path
+        self.msgDialog = QtGui.QMessageBox(QtGui.QMessageBox.Information, title, msg)
+        self.msgDialog.show()
+
+    def launch(self):
+        path = self.urdf_compose + "/urdf/temp.urdf.xacro"
+        self.createFile(path)
+
+        cmd = ["roslaunch", "urdf_compose", "demo.launch", "model:=temp.urdf.xacro"]
+        rviz = subprocess.call(cmd)
+
+    def createFile(self, path):
         robotFile = resolvePkgPaths(self.robots[self.cb_robots.currentText()]['file'])
         files = list()
 
@@ -448,18 +479,9 @@ class MainGUI(QtGui.QWidget):
         with open(path, 'w') as f:
             f.write(doc.toprettyxml("  "))
 
-        title = "URDF"
-        msg = "File created at " + path
-        self.msgDialog = QtGui.QMessageBox(QtGui.QMessageBox.Information, title, msg)
-        self.msgDialog.show()
-
-    def launch(self):
-        pass
-
 def main():
     app = QtGui.QApplication(sys.argv)
     gui = MainGUI()
-    gui.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":

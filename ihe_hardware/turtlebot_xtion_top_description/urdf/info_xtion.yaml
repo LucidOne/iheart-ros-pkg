@@ -104,30 +104,30 @@ xtion:
       front facing forward:
         params:
           parent: plate_3_link
-          x_loc: "0.0892782"
+          x_loc: "0.1264382"
           y_loc: "0"
           z_loc: "0.2032"
           rr: "0"
           rp: "0"
-          ry: "3.1415927"
+          ry: "0"
         requires:
           $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
-                x_loc: "0.0892782"
+                x_loc: "0.1264382"
                 y_loc: "-0.098"
                 z_loc: "-0.000125"
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "5"
-                x_loc: "0.0892782"
+                x_loc: "0.1264382"
                 y_loc: "0.098"
                 z_loc: "-0.000125"
       front facing backward:
         params:
           parent: plate_3_link
-          x_loc: "0.0892782"
+          x_loc: "0.1264382"
           y_loc: "0"
           z_loc: "0.2032"
           rr: "0"
@@ -138,12 +138,49 @@ xtion:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
-                x_loc: "0.0892782"
+                x_loc: "0.1264382"
                 y_loc: "-0.098"
                 z_loc: "-0.000125"
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "5"
-                x_loc: "0.0892782"
+                x_loc: "0.1264382"
                 y_loc: "0.098"
                 z_loc: "-0.000125"
+
+      x45 standard:
+        params:
+          parent: plate_3_link
+          x_loc: "-0.0892782"
+          y_loc: "0"
+          z_loc: "0.237"
+          rr: "0"
+          rp: "0.7853982"
+          ry: "0"
+        requires:
+          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "-0.0892782"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "-0.0892782"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+          $(find turtlebot_xtion_top_description)/urdf/xtion.xacro:
+            - xtion45_right_clip:
+                parent: standoff_8in_4_link
+                number: "0"
+                x_loc: "-0.0027"
+                y_loc: "-0.005555"
+                z_loc: "0.22655"
+            - xtion45_left_clip:
+                parent: standoff_8in_5_link
+                number: "0"
+                x_loc: "-0.0027"
+                y_loc: "0.005555"
+                z_loc: "0.22655"
