@@ -440,8 +440,10 @@ class MainGUI(QtGui.QWidget):
         robotFile = resolvePkgPaths(self.robots[self.cb_robots.currentText()]['file'])
         files = list()
 
+	self.attachedAccessories.sort()
+
         for acc in self.attachedAccessories:
-            if not (acc[0], acc[1]) in files:
+            if not (acc[0], acc[1]) in files:   # pkg, fname
                 files.append((acc[0], acc[1]))
 
         with open(robotFile, 'r') as f:
@@ -449,6 +451,11 @@ class MainGUI(QtGui.QWidget):
 
         doc = Document()
         robot = robotData.firstChild
+        robot_elements = robot.childNodes
+
+        for node in robot_elements:
+            if node.nodeType == node.TEXT_NODE:
+                robot.removeChild(node)
 
         for f in files:
             key = f[1] + " (" + f[0] + ")"

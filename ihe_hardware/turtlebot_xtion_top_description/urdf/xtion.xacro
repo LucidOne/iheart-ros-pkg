@@ -58,7 +58,7 @@
       <collision>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
         <geometry>
-          <box size="0.05 0.24 0.02"/>
+          <box size="0.05 0.246 0.02"/>
         </geometry>
       </collision>
     </link>
@@ -181,7 +181,7 @@
                params="parent number x_loc y_loc z_loc">
     <joint name="xtion45_left_clip_${number}_joint" type="fixed">
       <origin xyz="${x_loc} ${y_loc} ${z_loc}"
-              rpy="${M_PI/2} 0 0" />
+              rpy="0 0 0" />
       <parent link="${parent}" />
       <child link="xtion45_left_clip_${number}_link" />
     </joint>
@@ -206,7 +206,7 @@
                params="parent number x_loc y_loc z_loc">
     <joint name="xtion45_right_clip_${number}_joint" type="fixed">
       <origin xyz="${x_loc} ${y_loc} ${z_loc}"
-              rpy="${-M_PI/2} 0 0" />
+              rpy="0 0 0" />
       <parent link="${parent}" />
       <child link="xtion45_right_clip_${number}_link" />
     </joint>
@@ -224,6 +224,38 @@
           <mesh filename="package://turtlebot_xtion_top_description/meshes/xtion/xtion45_clip_right.dae" scale="0.001 0.001 0.001" />
         </geometry>
       </visual>
+    </link>
+  </xacro:macro>
+
+  <!-- extension plate -->
+
+  <xacro:macro name="plate_xtension" params="parent x_loc y_loc z_loc">
+    <joint name="plate_xtension_joint" type="fixed">
+      <origin xyz="${x_loc} ${y_loc} ${z_loc}" rpy="0 0 0" />
+      <parent link="${parent}" />
+      <child link="plate_xtension_link" />
+    </joint>
+
+    <link name="plate_xtension_link">
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://turtlebot_xtion_top_description/meshes/xtion/xtend_plate.dae" scale="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0.0265 0.0 0.0032005" rpy="0 0 0" />
+        <geometry>
+          <box size="0.066 0.28 0.006401"/>
+        </geometry>
+      </collision>
     </link>
   </xacro:macro>
 </robot>

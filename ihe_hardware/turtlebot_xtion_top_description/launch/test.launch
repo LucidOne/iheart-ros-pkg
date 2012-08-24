@@ -1,6 +1,7 @@
 <launch>
+  <arg name="file" default="turtlebot.urdf.xacro" />
 
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find turtlebot_xtion_top_description)/urdf/turtlebot.urdf.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find turtlebot_xtion_top_description)/urdf/$(arg file)'" />
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
 

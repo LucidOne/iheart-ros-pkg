@@ -19,7 +19,7 @@ xtion:
           rp: "0"
           ry: "0"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -42,7 +42,7 @@ xtion:
           rp: "0"
           ry: "3.1415927"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -65,7 +65,7 @@ xtion:
           rp: "0"
           ry: "0"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -88,7 +88,7 @@ xtion:
           rp: "0"
           ry: "3.1415927"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -111,7 +111,7 @@ xtion:
           rp: "0"
           ry: "0"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -134,7 +134,7 @@ xtion:
           rp: "0"
           ry: "3.1415927"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -158,7 +158,7 @@ xtion:
           rp: "0.7853982"
           ry: "0"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_8in:
                 parent: plate_3_link
                 number: "4"
@@ -184,3 +184,105 @@ xtion:
                 x_loc: "-0.0027"
                 y_loc: "0.005555"
                 z_loc: "0.22655"
+
+    plate_xtension:
+      standard:
+        params:
+          parent: plate_xtension_link
+          x_loc: "0"
+          y_loc: "0"
+          z_loc: "0.2032"
+          rr: "0"
+          rp: "0"
+          ry: "0"
+        requires:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
+            - turtlebot_standoff_8in:
+                parent: standoff_8in_4_link
+                number: "8"
+                x_loc: "0"
+                y_loc: "0"
+                z_loc: "0.2032"
+            - turtlebot_standoff_8in:
+                parent: standoff_8in_5_link
+                number: "9"
+                x_loc: "0"
+                y_loc: "0"
+                z_loc: "0.2032"
+
+      x45 standard:
+        params:
+          parent: plate_xtension_link
+          x_loc: "0"
+          y_loc: "0"
+          z_loc: "0.237"
+          rr: "0"
+          rp: "0.7853982"
+          ry: "0"
+        requires:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
+            - turtlebot_standoff_8in:
+                parent: standoff_8in_4_link
+                number: "8"
+                x_loc: "0"
+                y_loc: "0"
+                z_loc: "0.2032"
+            - turtlebot_standoff_8in:
+                parent: standoff_8in_5_link
+                number: "9"
+                x_loc: "0"
+                y_loc: "0"
+                z_loc: "0.2032"
+          $(find turtlebot_xtion_top_description)/urdf/xtion.xacro:
+            - xtion45_right_clip:
+                parent: standoff_8in_8_link
+                number: "0"
+                x_loc: "-0.0027"
+                y_loc: "-0.005555"
+                z_loc: "0.22655"
+            - xtion45_left_clip:
+                parent: standoff_8in_9_link
+                number: "0"
+                x_loc: "-0.0027"
+                y_loc: "0.005555"
+                z_loc: "0.22655"
+
+plate_xtension:
+  image: $(find urdf_compose)/images/xtension.png
+  description: >
+    An extension that provides your ASUS Xtion PRO LIVE with enough height
+    for your TurtleBot to see an attached arm.
+  parent:
+    plate_3_link:
+      standard:
+        params:
+          parent: plate_3_link
+          x_loc: "-0.0892782"
+          y_loc: "0"
+          z_loc: "0.2032"
+        requires:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "4"
+                x_loc: "-0.0892782"
+                y_loc: "-0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: plate_3_link
+                number: "5"
+                x_loc: "-0.0892782"
+                y_loc: "0.098"
+                z_loc: "-0.000125"
+            - turtlebot_standoff_8in:
+                parent: standoff_8in_2_link
+                number: "6"
+                x_loc: "0"
+                y_loc: "0"
+                z_loc: "0.2032"
+            - turtlebot_standoff_8in:
+                parent: standoff_8in_3_link
+                number: "7"
+                x_loc: "0"
+                y_loc: "0"
+                z_loc: "0.2032"

@@ -2,4 +2,4 @@ Demo usage:
 
 1) Launch the test file:
 
-roslaunch turtlebot_xtion_top_description test.launch
+roslaunch turtlebot_xtion_top_description test.launch [file:=<filename>]
