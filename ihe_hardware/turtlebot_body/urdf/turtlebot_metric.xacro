@@ -17,15 +17,6 @@
   <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin, navigation stack depends on this frame -->
 
   <link name="base_footprint">
-<!--
-    <inertial>
-      <mass value="0.0001" />
-      <origin xyz="0 0 0" />
-      <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
-              iyy="0.0001" iyz="0.0" 
-              izz="0.0001" />
-    </inertial>
--->
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -115,37 +106,37 @@
 
 
   <joint name="base_footprint_joint" type="fixed">
-    <origin xyz="0 0 0.017" rpy="0 0 0" />        
+    <origin xyz="0 0 0.017" rpy="0 0 0" />
     <parent link="base_footprint"/>
     <child link="base_link" />
   </joint>
 
   <joint name="base_wall_sensor_joint" type="fixed">
-    <origin xyz="0.09 -0.120 0.042" rpy="0 0 -1.0" />        
+    <origin xyz="0.09 -0.120 0.042" rpy="0 0 -1.0" />
     <parent link="base_link"/>
     <child link="wall_sensor_link" />
   </joint>
 
   <joint name="base_left_cliff_sensor_joint" type="fixed">
-    <origin xyz="0.07 0.14 0.01" rpy="0 1.57079 0" />        
+    <origin xyz="0.07 0.14 0.01" rpy="0 1.57079 0" />
     <parent link="base_link"/>
     <child link="left_cliff_sensor_link" />
   </joint>
 
   <joint name="base_right_cliff_sensor_joint" type="fixed">
-    <origin xyz="0.07 -0.14 0.01" rpy="0 1.57079 0" />        
+    <origin xyz="0.07 -0.14 0.01" rpy="0 1.57079 0" />
     <parent link="base_link"/>
     <child link="right_cliff_sensor_link" />
   </joint>
 
   <joint name="base_leftfront_cliff_sensor_joint" type="fixed">
-    <origin xyz="0.15 0.04 0.01" rpy="0 1.57079 0" />        
+    <origin xyz="0.15 0.04 0.01" rpy="0 1.57079 0" />
     <parent link="base_link"/>
     <child link="leftfront_cliff_sensor_link" />
   </joint>
 
   <joint name="base_rightfront_cliff_sensor_joint" type="fixed">
-    <origin xyz="0.15 -0.04 0.01" rpy="0 1.57079 0" />        
+    <origin xyz="0.15 -0.04 0.01" rpy="0 1.57079 0" />
     <parent link="base_link"/>
     <child link="rightfront_cliff_sensor_link" />
   </joint>
@@ -330,9 +321,9 @@
     </inertial>
 
     <visual>
-      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <origin xyz="0 0 0 " rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://turtlebot_description/meshes/plate_0_logo.dae"/>
+        <mesh filename="package://turtlebot_body/meshes/disk_00_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -350,7 +341,7 @@
   <turtlebot_standoff_2in parent="base_link" number="3" x_loc="-0.052832" y_loc="0.1314196" z_loc="0.0709803"/>
 
   <joint name="plate_1_joint" type="fixed">
-    <origin xyz="0.04068 0 0.05715" rpy="0 0 0" />
+    <origin xyz="0.04068 0 0.054" rpy="0 0 0" />
     <parent link="plate_0_link"/>
     <child link="plate_1_link" />
   </joint>
@@ -365,9 +356,9 @@
     </inertial>
 
     <visual>
-      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <origin xyz="0 0 0 " rpy="${M_PI/2} 0 ${M_PI/2}" />
       <geometry>
-        <mesh filename="package://turtlebot_description/meshes/plate_1_logo.dae"/>
+        <mesh filename="package://turtlebot_body/meshes/disk_01_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -400,9 +391,9 @@
     </inertial>
 
     <visual>
-      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <origin xyz="0 0 0 " rpy="${M_PI/2} 0 ${M_PI/2}" />
       <geometry>
-        <mesh filename="package://turtlebot_description/meshes/plate_1_logo.dae"/>
+        <mesh filename="package://turtlebot_body/meshes/disk_02_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -422,7 +413,7 @@
   <turtlebot_standoff_8in parent="standoff_2in_7_link" number="3" x_loc="0" y_loc="0" z_loc="0.05715"/>
 
   <joint name="plate_3_joint" type="fixed">
-    <origin xyz="-0.01316 0 0.2063496" rpy="0 0 0" />
+    <origin xyz="0 0 0.2094996" rpy="0 0 0" />
     <parent link="plate_2_link"/>
     <child link="plate_3_link" />
   </joint>
@@ -437,9 +428,9 @@
     </inertial>
 
     <visual>
-      <origin xyz=" 0 0 0 " rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}" />
       <geometry>
-        <mesh filename="package://turtlebot_description/meshes/plate_2_logo.dae"/>
+        <mesh filename="package://turtlebot_body/meshes/disk_03_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -450,7 +441,7 @@
       </geometry>
     </collision>
   </link>
-  
+
   <!-- Simulation sensors -->
   <turtlebot_sim_imu/>
   <turtlebot_sim_laser/>

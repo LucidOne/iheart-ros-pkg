@@ -440,37 +440,47 @@ class MainGUI(QtGui.QWidget):
         robotFile = resolvePkgPaths(self.robots[self.cb_robots.currentText()]['file'])
         files = list()
 
-	self.attachedAccessories.sort()
-
-        for acc in self.attachedAccessories:
-            if not (acc[0], acc[1]) in files:   # pkg, fname
-                files.append((acc[0], acc[1]))
+        self.attachedAccessories.sort()
 
         with open(robotFile, 'r') as f:
             robotData = parse(f)
 
         doc = Document()
         robot = robotData.firstChild
-        robot_elements = robot.childNodes
+        child = robot.firstChild
 
-        for node in robot_elements:
-            if node.nodeType == node.TEXT_NODE:
-                robot.removeChild(node)
+        while child:
+            if child.nodeType == child.TEXT_NODE:
+                nextChild = child.nextSibling
+                robot.removeChild(child)
+                child = nextChild
+                continue
+            elif child.nodeType == child.ELEMENT_NODE:
+                if child.tagName == "include":
+                    files.append(child.getAttribute("filename"))
 
-        for f in files:
-            key = f[1] + " (" + f[0] + ")"
+            child = child.nextSibling
+
+        for acc in self.attachedAccessories:
+            key = acc[1] + " (" + acc[0] + ")"  # fname (pkg)
 
             try:
-                include = doc.createElement("include")
-                include.setAttribute("filename", self.files[key]['file'])
-                robot.appendChild(include)
+                fpath = self.files[key]['file']
             except KeyError:
-                pass
+                continue
+
+            if fpath not in files:
+                include = doc.createElement("include")
+                include.setAttribute("filename", fpath)
+                robot.appendChild(include)
+
+                files.append(fpath)
 
         for f in self.reqFiles:
-            include = doc.createElement("include")
-            include.setAttribute("filename", f)
-            robot.appendChild(include)
+            if f not in files:
+                include = doc.createElement("include")
+                include.setAttribute("filename", f)
+                robot.appendChild(include)
 
         for acc in self.attachedAccessories:
             accInfo = acc[2]

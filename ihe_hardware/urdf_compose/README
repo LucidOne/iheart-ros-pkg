@@ -64,9 +64,6 @@ Run GUI
 
         rosrun urdf_compose gui.py
 
-If the output file is placed in urdf_compose/urdf, you can launch demo.launch
-to view the robot in rviz.
-
 Robots added to the "Select robot" combo box should not be macros. Only unique
 robot names will be listed.
 

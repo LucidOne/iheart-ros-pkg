@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<robot name="turtlebot" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro">
+  <include filename="$(find turtlebot_body)/urdf/turtlebot_metric.xacro"/>
+  <turtlebot_body/>
+</robot>

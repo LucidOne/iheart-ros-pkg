@@ -14,9 +14,9 @@
             cam_rr: "0"
             cam_rp: "0"
             cam_ry: "0"
-- package: turtlebot_description
+- package: turtlebot_xtion_top_description
   files:
-    - filename: turtlebot_hardware.urdf.xacro
+    - filename: turtlebot_hardware.xacro
       parts:
         - part_name: turtlebot_standoff_kinect
           params:
@@ -46,8 +46,6 @@
             x_loc: "-0.0892782"
             y_loc: "0.098"
             z_loc: "-0.000125"
-- package: turtlebot_xtion_top_description
-  files:
     - filename: xtion.xacro
       parts:
         - part_name: xtion

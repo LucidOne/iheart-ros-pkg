@@ -14,7 +14,7 @@ turtlebot_kinect:
           cam_rp: "0"
           cam_ry: "0"
         requires:
-          $(find turtlebot_description)/urdf/turtlebot_hardware.urdf.xacro:
+          $(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro:
             - turtlebot_standoff_kinect:
                 parent: plate_2_link
                 number: "0"

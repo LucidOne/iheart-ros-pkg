@@ -16,9 +16,7 @@
             rr: "0"
             rp: "0"
             ry: "0"
-- package: turtlebot_description
-  files:
-    - filename: turtlebot_hardware.urdf.xacro
+    - filename: turtlebot_hardware.xacro
       parts:
         - part_name: turtlebot_standoff_8in
           params:
