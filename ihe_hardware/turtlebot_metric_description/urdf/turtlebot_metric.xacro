@@ -323,7 +323,7 @@
     <visual>
       <origin xyz="0 0 0 " rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://turtlebot_body/meshes/disk_00_hex.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://turtlebot_metric_description/meshes/disk_00_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -358,7 +358,7 @@
     <visual>
       <origin xyz="0 0 0 " rpy="${M_PI/2} 0 ${M_PI/2}" />
       <geometry>
-        <mesh filename="package://turtlebot_body/meshes/disk_01_hex.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://turtlebot_metric_description/meshes/disk_01_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -393,7 +393,7 @@
     <visual>
       <origin xyz="0 0 0 " rpy="${M_PI/2} 0 ${M_PI/2}" />
       <geometry>
-        <mesh filename="package://turtlebot_body/meshes/disk_02_hex.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://turtlebot_metric_description/meshes/disk_02_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
@@ -430,7 +430,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}" />
       <geometry>
-        <mesh filename="package://turtlebot_body/meshes/disk_03_hex.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://turtlebot_metric_description/meshes/disk_03_hex.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
 
