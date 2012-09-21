@@ -2,4 +2,9 @@
 <robot name="turtlebot" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro">
   <include filename="$(find turtlebot_body)/urdf/turtlebot_metric.xacro"/>
   <turtlebot_body/>
+  <include filename="$(find urdf_compose)/urdf/kinect.xacro"/>
+  <include filename="$(find turtlebot_xtion_top_description)/urdf/turtlebot_hardware.xacro"/>
+  <turtlebot_standoff_kinect number="0" parent="plate_2_link" x_loc="-0.102438" y_loc="-0.098" z_loc="0.003201"/>
+  <turtlebot_standoff_kinect number="1" parent="plate_2_link" x_loc="-0.102438" y_loc="0.098" z_loc="0.003201"/>
+  <turtlebot_kinect cam_rp="0" cam_rr="0" cam_ry="0" cam_x="-0.0844382" cam_y="0" cam_z="0.10475" parent="plate_2_link"/>
 </robot>

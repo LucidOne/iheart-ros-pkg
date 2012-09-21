@@ -494,7 +494,7 @@
   <!-- left clip for xtion -->
 
   <joint name="base_xtion_left_clip_joint" type="fixed">
-    <origin xyz="0.017 -0.0745 0.00635" 
+    <origin xyz="-0.017 -0.0745 0.00635" 
             rpy="0.0 0.0 0.0" />
     <parent link="xtion_platform" />
     <child link="xtion_left_clip" />
