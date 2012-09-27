@@ -15,7 +15,10 @@
   <depend package="rviz"/>
   <depend package="joint_state_publisher"/>
   <depend package="robot_state_publisher"/>
+  <depend package="pluginlib"/>
 
+  <export>
+    <urdf base="${prefix}/urdf/turtlebot.uraf"/>
+    <urdf plugin="${prefix}/urdf/kinect.uraf"/>
+  </export>
 </package>
-
-

@@ -120,16 +120,43 @@ class MainGUI(QtGui.QWidget):
         self.img_robot.setAlignment(QtCore.Qt.AlignCenter)
 
     def initComboBoxes(self):
-        path = self.urdf_compose + "/src/gui/robots.yaml"
+        cmd = ["rospack", "plugins", "--attrib=base", "urdf"]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        result = p.communicate()[0].split()
 
-        try:
-            self.robots = yaml.load(open(path, 'r'))
-        except IOError, e:
-            print "Could not open/missing file \"%s\"." % path
-            sys.exit(1)
-        except yaml.YAMLError, e:
-            print e
-            sys.exit(1)
+        self.robots = {}
+        i = 0
+
+        while i < len(result):
+            if re.findall(r".uraf$", result[i+1]):
+                with open(result[i+1], 'r') as f:
+                    data = yaml.load(f)
+                for robot in data:
+                    find = "$(find %s)" % result[i]
+                    path = robot['file']
+                    path = find + "/" + path
+                    fpath = resolvePkgPaths(path)
+
+                    with open(fpath, 'r') as f:
+                        data = parse(f)
+
+                    data = data.getElementsByTagName("robot")[0]
+                    robotKey = data.getAttribute("name")
+                    robotKey += " (%s : %s)" % (result[i],
+                                                os.path.basename(fpath))
+                    self.robots[robotKey] = {'file':path,
+                                             'image':find + "/" + robot['image']}
+            else:
+                with open(result[i+1], 'r') as f:
+                    data = parse(f)
+
+                data = data.getElementsByTagName("robot")[0]
+                robotKey = data.getAttribute("name")
+                robotKey += " (%s : %s)" % (result[i],
+                                            os.path.basename(result[i+1]))
+                self.robots[robotKey] = {'file':getResolveString(result[i+1]),
+                                         'image':''}
+            i += 2
 
         self.cb_robots = QtGui.QComboBox()
 
@@ -147,16 +174,28 @@ class MainGUI(QtGui.QWidget):
         self.cb_robots.currentIndexChanged[str].connect(self.updateRobot)
 
     def initLists(self):
-        path = self.urdf_compose + "/src/gui/files.yaml"
+        cmd = ["rospack", "plugins", "--attrib=plugin", "urdf"]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        result = p.communicate()[0].split()
 
-        try:
-            self.files = yaml.load(open(path, 'r'))
-        except IOError, e:
-            print "Could not open/missing file \"%s\"." % path
-            sys.exit(1)
-        except yaml.YAMLError, e:
-            print e
-            sys.exit(1)
+        self.files = {}
+        i = 0
+
+        while i < len(result):
+            if re.findall(r".uraf$", result[i+1]):
+                with open(result[i+1], 'r') as f:
+                    data = yaml.load(f)
+
+                urdf = data['urdf']
+                description = result[i+1]
+            else:
+                urdf = result[i+1]
+                description = ""
+
+            accKey = os.path.basename(urdf)
+            accKey += " (%s)" % (result[i])
+            self.files[accKey] = {'file': urdf, 'description':description}
+            i += 2
 
         self.list_attAcc = QtGui.QListWidget()
         self.list_files = QtGui.QListWidget()

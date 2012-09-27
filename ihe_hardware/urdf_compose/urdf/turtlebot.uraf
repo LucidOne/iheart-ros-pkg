@@ -1,0 +1,3 @@
+-
+  file: urdf/turtlebot_minimal.urdf.xacro
+  image: images/turtlebot_minimal.png

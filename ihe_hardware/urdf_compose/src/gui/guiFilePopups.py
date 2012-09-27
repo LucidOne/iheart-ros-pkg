@@ -1,3 +1,4 @@
+import os
 import re
 import yaml
 from xml.dom.minidom import parse
@@ -127,16 +128,19 @@ class AddRobotDialog(GetTwoFilesDialog):
         self.le_f2.setText(image)
 
     def add(self):
-        file_path = getResolveString(self.le_f1.text())
+        fpath = self.le_f1.text()
+        file_path = getResolveString(fpath)
         image_path = getResolveString(self.le_f2.text())
         result = {"file": file_path, "image": image_path}
 
         with open(self.le_f1.text(), 'r') as f:
             urdf = parse(f)
             robotTag = urdf.getElementsByTagName("robot")[0]
-            robotName = robotTag.getAttribute("name")
+            robotKey = robotTag.getAttribute("name")
+            robotKey += " (%s : %s)" % (roslib.packages.get_dir_pkg(fpath)[1],
+                                        os.path.basename(fpath))
 
-        self.parent.addRobotToComboBox(robotName, result)
+        self.parent.addRobotToComboBox(robotKey, result)
 
 class AddAccessoryFileDialog(GetTwoFilesDialog):
     def __init__(self, parent):

@@ -1,3 +1,4 @@
+urdf: $(find urdf_compose)/urdf/kinect.xacro
 turtlebot_kinect:
   image: $(find urdf_compose)/images/kinect.png
   description: >

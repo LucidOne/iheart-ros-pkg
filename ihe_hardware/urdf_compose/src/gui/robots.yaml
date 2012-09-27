@@ -1,3 +1,0 @@
-turtlebot:
-  file: $(find urdf_compose)/urdf/turtlebot_body.urdf.xacro
-  image: $(find urdf_compose)/images/turtlebot.png

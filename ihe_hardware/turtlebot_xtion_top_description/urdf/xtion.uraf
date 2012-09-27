@@ -1,5 +1,6 @@
+urdf: $(find turtlebot_xtion_top_description)/urdf/xtion.xacro
 xtion:
-  image: $(find urdf_compose)/images/xtion.png
+  image: $(find turtlebot_xtion_top_description)/images/xtion.png
   description: >
     The ASUS Xtion PRO LIVE uses infrared sensors, adaptive depth detection
     technology, color image sensing and audio stream to capture a users'
@@ -248,7 +249,7 @@ xtion:
                 z_loc: "0.22655"
 
 plate_xtension:
-  image: $(find urdf_compose)/images/xtension.png
+  image: $(find turtlebot_xtion_top_description)/images/xtension.png
   description: >
     An extension that provides your ASUS Xtion PRO LIVE with enough height
     for your TurtleBot to see an attached arm.

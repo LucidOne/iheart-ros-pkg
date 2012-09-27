@@ -1,0 +1,5 @@
+Demo usage:
+
+1) Launch the test file:
+
+    roslaunch turtlebot_metric_description test.launch

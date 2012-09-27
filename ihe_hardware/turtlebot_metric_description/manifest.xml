@@ -9,6 +9,11 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/turtlebot_metric_description</url>
 
+  <depend package="urdf"/>
+  <depend package="xacro"/>
+  <depend package="pluginlib"/>
+
+  <export>
+    <urdf base="${prefix}/urdf/turtlebot_metric.uraf"/>
+  </export>
 </package>
-
-

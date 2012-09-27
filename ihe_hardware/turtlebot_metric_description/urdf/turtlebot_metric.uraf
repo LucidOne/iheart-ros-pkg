@@ -1,0 +1,6 @@
+-
+  file: urdf/turtlebot_metric.urdf.xacro
+  image: images/turtlebot_metric.png
+-
+  file: urdf/turtlebot_metric_minimal.urdf.xacro
+  image: images/turtlebot_metric_minimal.png
