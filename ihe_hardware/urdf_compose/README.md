@@ -3,12 +3,12 @@ Run GUI
 
 1. Build the turtlebot_body.
 
-     roscd urdf_compose/urdf
-     rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
+       roscd urdf_compose/urdf
+       rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
 
 2. Run the GUI.
 
-     rosrun urdf_compose gui.py
+       rosrun urdf_compose gui.py
 
 Only macros from added files will be displayed in the "Accessories" list.
 
@@ -36,13 +36,13 @@ i.e., the file contains macros.
 Format for Descripiton Files (uraf)
 -----------------------------------
 
-# Bases
+### Bases
 
     -
       file: <path to urdf file>
       image: <path to image file>
 
-# Plugins (Accessories)
+### Plugins (Accessories)
 
     urdf: <path to urdf file>   # this line only appears once per file
     <accessory name/macro name>:
@@ -92,18 +92,18 @@ Run Demo (compose.py)
 
 1. Open the urdf directory.
 
-     roscd urdf_compose/urdf
+       roscd urdf_compose/urdf
 
 2. Generate urdf files. (yaml files are located in the demo directory.)
 
-     rosrun urdf_compose compose.py ../demo/kinect.yaml -o kinect.urdf.xacro -n kinect
-     rosrun urdf_compose compose.py ../demo/xtion.yaml -o xtion.urdf.xacro -n xtion
-     rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
-     rosrun urdf_compose compose.py ../demo/turtlebot.yaml -o turtlebot.urdf.xacro
+       rosrun urdf_compose compose.py ../demo/kinect.yaml -o kinect.urdf.xacro -n kinect
+       rosrun urdf_compose compose.py ../demo/xtion.yaml -o xtion.urdf.xacro -n xtion
+       rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
+       rosrun urdf_compose compose.py ../demo/turtlebot.yaml -o turtlebot.urdf.xacro
 
 3. Launch rviz.
 
-     roslaunch urdf_compose demo.launch model:=<model>
+       roslaunch urdf_compose demo.launch model:=<model>
 
    <model> = { kinect.urdf.xacro,
                xtion.urdf.xacro,
