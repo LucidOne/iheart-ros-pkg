@@ -14,6 +14,7 @@
   <depend package="pluginlib"/>
 
   <export>
+    <urdf base="${prefix}/urdf/turtlebot_xtion.uraf"/>
     <urdf plugin="${prefix}/urdf/xtion.uraf"/>
   </export>
 </package>

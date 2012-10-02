@@ -142,19 +142,21 @@ class MainGUI(QtGui.QWidget):
 
                     data = data.getElementsByTagName("robot")[0]
                     robotKey = data.getAttribute("name")
-                    robotKey += " (%s : %s)" % (result[i],
-                                                os.path.basename(fpath))
-                    self.robots[robotKey] = {'file':path,
-                                             'image':find + "/" + robot['image']}
+                    robotKey += " (%s : %s)" % (result[i], os.path.basename(fpath))
+                    image = robot['image']
+
+                    if image:
+                        image = find + "/" + image
+
+                    self.robots[robotKey] = {'file':path, 'image':image}
             else:
                 with open(result[i+1], 'r') as f:
                     data = parse(f)
 
                 data = data.getElementsByTagName("robot")[0]
                 robotKey = data.getAttribute("name")
-                robotKey += " (%s : %s)" % (result[i],
-                                            os.path.basename(result[i+1]))
-                self.robots[robotKey] = {'file':getResolveString(result[i+1]),
+                robotKey += " (%s : %s)" % (result[i], os.path.basename(result[i+1]))
+                self.robots[robotKey] = {'file' :getResolveString(result[i+1]),
                                          'image':''}
             i += 2
 
@@ -276,9 +278,11 @@ class MainGUI(QtGui.QWidget):
 
     def addRobotToComboBox(self, robotName, robotInfo):
         # if robot exists already
-        if self.cb_robots.findText(robotName, QtCore.Qt.MatchExactly) == 1:
-            msg = self.tr("Robot \"%s\" already exists.\n\n"
-                          "Replace the existing \"%s\"?") % (robotName, robotName)
+        if self.cb_robots.findText(robotName, QtCore.Qt.MatchExactly) > -1:
+            name, pkg, fname, _ = re.split(r"[ ():]*", robotName)
+            msg = self.tr("Robot \"%s\" from package %s and file %s "
+                          "already exists.\n\n"
+                          "Do you wish to replace the robot?") % (name, pkg, fname)
             reply = QtGui.QMessageBox.question(self, "Add Robot", msg,
                                                QtGui.QMessageBox.Yes,
                                                QtGui.QMessageBox.No)
@@ -387,7 +391,7 @@ class MainGUI(QtGui.QWidget):
 
         self.dialog.close()
 
-        accInfo = result['part_name'] + " (" + pkg + ":" + fname + ")"
+        accInfo = "%s (%s:%s)" % (result['part_name'], pkg, fname)
 
         for k, v in result['params'].items():
             accInfo += ("\n    " + k + ": " + v)
@@ -501,7 +505,7 @@ class MainGUI(QtGui.QWidget):
             child = child.nextSibling
 
         for acc in self.attachedAccessories:
-            key = acc[1] + " (" + acc[0] + ")"  # fname (pkg)
+            key = "%s (%s)" % (acc[1], acc[0])  # fname (pkg)
 
             try:
                 fpath = self.files[key]['file']

@@ -1,0 +1,6 @@
+-
+  file: urdf/turtlebot.urdf.xacro
+  image: images/turtlebot_xtion.png
+-
+  file: urdf/turtlebot_x45_xtended.urdf.xacro
+  image: images/turtlebot_xtension.png

@@ -219,7 +219,7 @@ class AddAccessoryDialog(QtGui.QDialog):
         added = self.parent.addAccToRobot(result, self.pkg, self.fname)
 
         if added:
-            accInfo = result['part_name'] + " (" + self.pkg + ":" + self.fname + ")"
+            accInfo = "%s (%s : %s)" % (result['part_name'], self.pkg, self.fname)
 
             for k, v in result['params'].items():
                 accInfo += ("\n    " + k + ": " + v)
@@ -236,7 +236,7 @@ class AddAccessoryDialog(QtGui.QDialog):
                 added = self.parent.addAccToRobot(result, pkg, fname, fpath)
 
                 if added:
-                    accInfo = result['part_name'] + " (" + pkg + ":" + fname + ")"
+                    accInfo = "%s (%s : %s)" % (result['part_name'], pkg, fname)
 
                     for k, v in result['params'].items():
                         accInfo += ("\n    " + k + ": " + v)
