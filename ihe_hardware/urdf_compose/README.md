@@ -3,16 +3,16 @@ I. Run GUI
 
 1. Build the turtlebot_body.
 
-```
-roscd urdf_compose/urdf
-rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
-```
+    ```
+    roscd urdf_compose/urdf
+    rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
+    ```
 
 2. Run the GUI.
 
-```
-rosrun urdf_compose gui.py
-```
+    ```
+    rosrun urdf_compose gui.py
+    ```
 
 Only macros from added files will be displayed in the "Accessories" list.
 
@@ -87,29 +87,30 @@ Run Demo (compose.py)
 
 1. Open the urdf directory.
 
-```
-roscd urdf_compose/urdf
-```
+    ```
+    roscd urdf_compose/urdf
+    ```
 
 2. Generate urdf files. (yaml files are located in the demo directory.)
 
-```
-rosrun urdf_compose compose.py ../demo/kinect.yaml -o kinect.urdf.xacro -n kinect
-rosrun urdf_compose compose.py ../demo/xtion.yaml -o xtion.urdf.xacro -n xtion
-rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
-rosrun urdf_compose compose.py ../demo/turtlebot.yaml -o turtlebot.urdf.xacro
-```
+    ```
+    rosrun urdf_compose compose.py ../demo/kinect.yaml -o kinect.urdf.xacro -n kinect
+    rosrun urdf_compose compose.py ../demo/xtion.yaml -o xtion.urdf.xacro -n xtion
+    rosrun urdf_compose compose.py ../demo/turtlebot_body.yaml -o turtlebot_body.urdf.xacro
+    rosrun urdf_compose compose.py ../demo/turtlebot.yaml -o turtlebot.urdf.xacro
+    ```
 
 3. Launch rviz.
 
-```
-roslaunch urdf_compose demo.launch model:=<model>
-```
+    ```
+    roslaunch urdf_compose demo.launch model:=<model>
+    ```
 
-   &lt;model&gt; = {kinect.urdf.xacro,
-                    xtion.urdf.xacro,
-                    turtlebot.urdf.xacro,
-                    turtlebot_body.urdf.xacro }
+   &lt;model&gt; is a file generated in Step 2, e.g.,
+
+    ```
+    roslaunch urdf_compose demo.launch model:=turtlebot.urdf.xacro
+    ```
 
 Note: The turtlebot_body included in the package does not include the kinect
       standoffs like the body included in turtlebot_description.
